@@ -1,13 +1,13 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Terminal, ArrowRight } from 'lucide-react';
+import { 
+  Menu, X, ArrowRight, 
+  Instagram, Facebook, MessageCircle, Music2, Star 
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BRAND_NAME } from '../constants.js';
 import { Tutorial } from './Tutorial.jsx';
 import Logo from './logo.png';
-//
-import { style } from 'framer-motion/client';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -27,7 +27,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className={`p-1.5 md:p-2 rounded-lg  transition-transform`} style={{ backgroundColor: '#1b213bff' }}>
+            <div className={`p-1.5 md:p-2 rounded-lg transition-transform`} style={{ backgroundColor: '#1b213bff' }}>
               <img src={Logo} alt="" className="w-6 h-6 md:w-8 md:h-8" />
             </div>
             <span className="text-lg md:text-xl font-bold tracking-tight text-white">{BRAND_NAME}</span>
@@ -48,7 +48,7 @@ const Navbar = () => {
             <Link 
               id="admin-btn"
               to="/admin" 
-              className="text-sm bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors"
+              className="text-sm bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors text-white"
             >
               Admin
             </Link>
@@ -103,48 +103,96 @@ const Navbar = () => {
   );
 };
 
-const Footer = () => (
-  <footer className="bg-[#050505] border-t border-white/5 pt-16 md:pt-20 pb-10">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-16">
-        <div className="col-span-1 md:col-span-2">
-          <Link to="/" className="flex items-center gap-2 mb-6">
-            <div className="p-1.5 rounded-md" style={{ backgroundColor: '#1b213bff' }}>
-              <img src={Logo} alt="" className="w-5 h-5 md:w-7 md:h-7" />
+const Footer = () => {
+  const socialLinks = [
+    { icon: <Instagram size={18} />, url: 'https://www.instagram.com/tigratech0', label: 'Instagram', hover: 'hover:text-pink-500' },
+    { icon: <Facebook size={18} />, url: 'https://www.facebook.com/tigratechs', label: 'Facebook', hover: 'hover:text-blue-600' },
+    { icon: <Music2 size={18} />, url: 'https://tiktok.com', label: 'TikTok', hover: 'hover:text-cyan-400' },
+    { icon: <MessageCircle size={18} />, url: 'https://wa.me', label: 'WhatsApp', hover: 'hover:text-green-500' },
+  ];
+
+  return (
+    <footer className="bg-[#050505] border-t border-white/5 pt-16 md:pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-12 mb-16">
+          {/* Brand and Socials */}
+          <div className="col-span-1 md:col-span-1">
+            <Link to="/" className="flex items-center gap-2 mb-6">
+              <div className="p-1.5 rounded-md" style={{ backgroundColor: '#1b213bff' }}>
+                <img src={Logo} alt="" className="w-5 h-5 md:w-7 md:h-7" />
+              </div>
+              <span className="text-xl font-bold text-white">{BRAND_NAME}</span>
+            </Link>
+            <p className="text-gray-400 mb-6 text-sm leading-relaxed">
+              Providing high-performance digital infrastructure for the Taigours Group and its global subsidiaries.
+            </p>
+            <div className="flex gap-3">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-gray-400 transition-all duration-300 ${social.hover} hover:bg-white/10 hover:scale-110`}
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
-            <span className="text-xl font-bold text-white">{BRAND_NAME}</span>
-          </Link>
-          <p className="text-gray-400 max-w-sm text-sm md:text-base">
-            Providing high-performance digital infrastructure for the Taigours Group of Organization (TGO) and its subsidiaries worldwide.
-          </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-white font-semibold mb-6">Explore</h4>
+            <ul className="space-y-4 text-gray-400 text-sm">
+              <li><Link to="/projects" className="hover:text-blue-500 transition-colors">Projects</Link></li>
+              <li><Link to="/services" className="hover:text-blue-500 transition-colors">Services</Link></li>
+              <li><Link to="/blogs" className="hover:text-blue-500 transition-colors">Insights</Link></li>
+            </ul>
+          </div>
+
+          {/* Corporate */}
+          <div>
+            <h4 className="text-white font-semibold mb-6">Corporate</h4>
+            <ul className="space-y-4 text-gray-400 text-sm">
+              <li><a href="taigours-group.github.io" target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors">TGO Group</a></li>
+              <li><Link to="/about" className="hover:text-blue-500 transition-colors">Careers</Link></li>
+              <li><Link to="/contact" className="hover:text-blue-500 transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Trust Testimonial Badge */}
+          <div className="bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col justify-center">
+            <div className="flex gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} className="fill-yellow-500 text-yellow-500" />
+              ))}
+            </div>
+            <p className="text-gray-300 text-sm italic mb-3">
+              "Excellent service and robust infrastructure support."
+            </p>
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-blue-500/20 flex items-center justify-center text-[10px] text-blue-400 font-bold">
+                TGO
+              </div>
+              <span className="text-gray-500 text-xs font-medium">Verified Partner</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <h4 className="text-white font-semibold mb-6">Explore</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
-            <li><Link to="/projects" className="hover:text-blue-500 transition-colors">Projects</Link></li>
-            <li><Link to="/services" className="hover:text-blue-500 transition-colors">Services</Link></li>
-            <li><Link to="/blogs" className="hover:text-blue-500 transition-colors">Insights</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold mb-6">Corporate</h4>
-          <ul className="space-y-4 text-gray-400 text-sm">
-            <li><a href="https://taigours-group.github.io/Taigours-Group/" target="_blank" className="hover:text-blue-500 transition-colors">TGO Group</a></li>
-            <li><Link to="/about" className="hover:text-blue-500 transition-colors">Careers</Link></li>
-            <li><Link to="/contact" className="hover:text-blue-500 transition-colors">Contact</Link></li>
-          </ul>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-gray-500 text-xs md:text-sm text-center gap-4">
+          <p>&copy; 2026 TigraTech Pvt. Ltd. All rights reserved.</p>
+          <div className="flex gap-6">
+            <a href="/privacy-policy.html" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service.html" className="hover:text-white transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-gray-500 text-xs md:text-sm text-center gap-4">
-        <p>&copy; 2024 TigraTech Pvt. Ltd. All rights reserved.</p>
-        <div className="flex gap-6">
-          <a href="/privacy-policy.html" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="/terms-of-service.html" className="hover:text-white transition-colors">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export const Layout = ({ children }) => {
   return (
