@@ -88,7 +88,7 @@ export const Projects = () => {
           ))}
         </div>
 
-        <div className="grid mb-24 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid m-5 mb-24 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id || idx} // Fallback to idx if id is missing
