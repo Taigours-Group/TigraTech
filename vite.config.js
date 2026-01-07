@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
           usePolling: true,
         },
         proxy: {
-          '/api': "http://localhost:5000",
+          '/api': "http://localhost:10000",
         },
       },
       plugins: [react()],
